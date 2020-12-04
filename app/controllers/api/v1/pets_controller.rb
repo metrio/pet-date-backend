@@ -1,7 +1,7 @@
 class Api::V1::PetsController < ApplicationController
     
     def show
-        pet = Pet.find(params[:id])
+        pet = find_pet
         render json: pet.to_json(:include => {
             :playdates => {:except => [:created_at, :updated_at]},
             },
@@ -15,5 +15,25 @@ class Api::V1::PetsController < ApplicationController
             },
             :except => [:created_at, :updated_at])
     end
+
+    def new
+        pet = Pet.new
+    end
+
+    def create
+        pet = Pet.create(pet_params)
+        render json: pet
+    end
+
+
+    private
+
+    def pet_params
+        params.permit(:name, :temper, :age, :breed, :gender, :species, :img)
+      end
+    
+      def find_pet
+        Pet.find(params[:id])
+      end
 
 end
