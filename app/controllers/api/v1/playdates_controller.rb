@@ -1,6 +1,5 @@
 class Api::V1::PlaydatesController < ApplicationController
 
-  before_action 
 
   def index
     playdates = Playdate.all
