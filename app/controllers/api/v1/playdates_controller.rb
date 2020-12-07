@@ -40,7 +40,7 @@ class Api::V1::PlaydatesController < ApplicationController
   private
 
   def playdate_params
-    params.permit(:pet_id, :pet2_id, :date, :location)
+    params.require(:playdate).permit(:pet_id, :pet2_id, :date, :location)
   end
 
   def find_playdate
